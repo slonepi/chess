@@ -1,6 +1,10 @@
 package model;
 
 import model.Pieces.Pawn;
+import util.MovementUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yann on 23/12/16.
@@ -47,5 +51,19 @@ public class Board {
     }
 
     return (char)27+ "["+pieceColor+";"+background+"m"+value+ (char)27 + "[0;0m";
+  }
+
+  public List<Movement> getAvailableMouvements(Color color) {
+    List<Movement> availableMouvements = new ArrayList<>();
+    Piece piece;
+    for (int i = 0; i < 8 ; i++) {
+      for (int j = 0; j < 8; j++) {
+        piece = board[i][j];
+        if (piece != null && piece.getColor() == color) {
+          availableMouvements.addAll(MovementUtil.getPieceMovement(piece,board,i,j));
+        }
+      }
+    }
+    return availableMouvements;
   }
 }
