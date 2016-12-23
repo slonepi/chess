@@ -3,6 +3,7 @@ package util;
 import model.Color;
 import model.Movement;
 import model.Piece;
+import model.Pieces.King;
 import model.Pieces.Pawn;
 
 import java.util.ArrayList;
@@ -47,6 +48,33 @@ public class MovementUtil {
       }
     }
 
+    // TODO: manage rock
+    else if (piece instanceof King) {
+      if (emptyOrForeignCase(i-1,j-1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-1,j-1));
+      }
+      if (emptyOrForeignCase(i-1,j,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-1,j));
+      }
+      if (emptyOrForeignCase(i-1,j+1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-1,j+1));
+      }
+      if (emptyOrForeignCase(i,j-1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i,j-1));
+      }
+      if (emptyOrForeignCase(i,j+1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i,j+1));
+      }
+      if (emptyOrForeignCase(i+1,j-1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+1,j-1));
+      }
+      if (emptyOrForeignCase(i+1,j,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+1,j));
+      }
+      if (emptyOrForeignCase(i+1,j+1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+1,j+1));
+      }
+    }
     return movements;
   }
 
@@ -58,4 +86,7 @@ public class MovementUtil {
     return validateCoordonates(i,j) && board[i][j] == null;
   }
 
+  public static boolean emptyOrForeignCase(int i, int j, Piece[][] board, Color myColor) {
+    return validateCoordonates(i,j) && (board[i][j] == null || board[i][j].getColor() != myColor);
+  }
 }

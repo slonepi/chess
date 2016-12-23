@@ -1,5 +1,7 @@
 package model;
 
+import model.Pieces.King;
+import model.Pieces.Knight;
 import model.Pieces.Pawn;
 import util.MovementUtil;
 
@@ -19,10 +21,22 @@ public class Board {
 
   public void init(){
     eatenPieces = new ArrayList<>();
+
+    // Pawns
     for (int i = 0; i < 8; i++) {
       board[1][i] = new Pawn(Color.WHITE);
       board[6][i] = new Pawn(Color.BLACK);
     }
+
+    // Knights
+    board[0][1] = new Knight(Color.WHITE);
+    board[0][6] = new Knight(Color.WHITE);
+    board[7][1] = new Knight(Color.BLACK);
+    board[7][6] = new Knight(Color.BLACK);
+
+    // Kings
+    board[0][4] = new King(Color.WHITE);
+    board[7][4] = new King(Color.BLACK);
   }
 
   public List<Movement> getAvailableMouvements(Color color) {
@@ -70,7 +84,7 @@ public class Board {
 
 
   public static String format(Piece piece,int i, int j) {
-    String background =  (i+j) % 2 == 0 ? "40" : "47";
+    String background =  (i+j) % 2 == 0 ? "47" : "40";
     String pieceColor = "31";
     String value = "   ";
     if (piece != null) {
