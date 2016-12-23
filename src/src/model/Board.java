@@ -72,7 +72,7 @@ public class Board {
   public static String format(Piece piece,int i, int j) {
     String background =  (i+j) % 2 == 0 ? "40" : "47";
     String pieceColor = "31";
-    String value = " ";
+    String value = "   ";
     if (piece != null) {
       value = piece.toString();
       if (piece.color == Color.BLACK)

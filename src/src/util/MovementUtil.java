@@ -25,12 +25,24 @@ public class MovementUtil {
         if (i == 1 && emptyCase(i + 1, j, board) && emptyCase(i + 2, j, board)) {
           movements.add(new Movement(i, j, i + 2, j));
         }
+        if (validateCoordonates(i+1,j+1) && board[i+1][j+1] != null && board[i+1][j+1].getColor() != piece.getColor()) {
+          movements.add(new Movement(i,j,i+1, j+1));
+        }
+        if (validateCoordonates(i+1,j-1) && board[i+1][j-1] != null && board[i+1][j-1].getColor() != piece.getColor()) {
+          movements.add(new Movement(i,j,i+1, j-1));
+        }
       } else {
         if (emptyCase(i - 1, j, board)) {
           movements.add(new Movement(i, j, i - 1, j));
         }
         if (i == 6 && emptyCase(i - 1, j, board) && emptyCase(i - 2, j, board)) {
           movements.add(new Movement(i, j, i - 2, j));
+        }
+        if (validateCoordonates(i-1,j-1) && board[i-1][j-1] != null && board[i-1][j-1].getColor() != piece.getColor()) {
+          movements.add(new Movement(i,j,i-1, j-1));
+        }
+        if (validateCoordonates(i-1,j+1) && board[i-1][j+1] != null && board[i-1][j+1].getColor() != piece.getColor()) {
+          movements.add(new Movement(i,j,i-1, j+1));
         }
       }
     }
@@ -45,4 +57,5 @@ public class MovementUtil {
   public static boolean emptyCase(int i, int j, Piece[][] board) {
     return validateCoordonates(i,j) && board[i][j] == null;
   }
+
 }
