@@ -4,6 +4,7 @@ import model.Color;
 import model.Movement;
 import model.Piece;
 import model.Pieces.King;
+import model.Pieces.Knight;
 import model.Pieces.Pawn;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class MovementUtil {
       }
     }
 
-    // TODO: manage rock
+    // TODO: manage rock + chess positions
     else if (piece instanceof King) {
       if (emptyOrForeignCase(i-1,j-1,board,piece.getColor())) {
         movements.add(new Movement(i,j,i-1,j-1));
@@ -73,6 +74,33 @@ public class MovementUtil {
       }
       if (emptyOrForeignCase(i+1,j+1,board,piece.getColor())) {
         movements.add(new Movement(i,j,i+1,j+1));
+      }
+    }
+
+    else if (piece instanceof Knight) {
+      if (emptyOrForeignCase(i-1,j-2,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-1,j-2));
+      }
+      if (emptyOrForeignCase(i-2,j-1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-2,j-1));
+      }
+      if (emptyOrForeignCase(i-2,j+1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-2,j+1));
+      }
+      if (emptyOrForeignCase(i-1,j+2,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i-1,j+2));
+      }
+      if (emptyOrForeignCase(i+1,j-2,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+1,j-2));
+      }
+      if (emptyOrForeignCase(i+2,j-1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+2,j-1));
+      }
+      if (emptyOrForeignCase(i+2,j+1,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+2,j+1));
+      }
+      if (emptyOrForeignCase(i+1,j+2,board,piece.getColor())) {
+        movements.add(new Movement(i,j,i+1,j+2));
       }
     }
     return movements;
