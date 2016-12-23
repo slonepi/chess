@@ -33,9 +33,12 @@ public class Game {
 
     while(true) {
       System.out.println(game.toString());
-      List<Movement> avaibleMovements = game.board.getAvailableMouvements(game.current.getColor());
-      Movement movement = null;
+      List<Movement> availableMovements = game.board.getAvailableMouvements(game.current.getColor());
+
+      // Get player movement
+      Movement movement;
       int i, j;
+
       do {
         Scanner scanner = new Scanner(System.in);
         //TODO read optional piece if ambiguous
@@ -43,13 +46,19 @@ public class Game {
         i = scanner.nextInt();
         System.out.println("Enter j...");
         j = scanner.nextInt();
-        movement = validateInputs(avaibleMovements,i,j);
+        movement = validateInputs(availableMovements,i,j);
 
         if (movement == null) {
           System.out.println("!!! Invalid inputs !!!");
         }
       } while (movement == null);
+
+      // Move piece
       System.out.println("Movement asked... i = "+i+", i = "+j);
+      game.board.doMove(movement);
+
+      // Switch player
+      game.current = game.current == game.p1 ? game.p2 : game.p1;
     }
   }
 

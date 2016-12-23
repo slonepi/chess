@@ -29,7 +29,7 @@ public class MovementUtil {
         if (emptyCase(i - 1, j, board)) {
           movements.add(new Movement(i, j, i - 1, j));
         }
-        if (i == 1 && emptyCase(i - 1, j, board) && emptyCase(i - 2, j, board)) {
+        if (i == 6 && emptyCase(i - 1, j, board) && emptyCase(i - 2, j, board)) {
           movements.add(new Movement(i, j, i - 2, j));
         }
       }
