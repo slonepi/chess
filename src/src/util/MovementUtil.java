@@ -6,6 +6,7 @@ import model.Piece;
 import model.Pieces.King;
 import model.Pieces.Knight;
 import model.Pieces.Pawn;
+import model.Pieces.Rock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,48 @@ public class MovementUtil {
       }
       if (emptyOrForeignCase(i+1,j+2,board,piece.getColor())) {
         movements.add(new Movement(i,j,i+1,j+2));
+      }
+    }
+
+    else if (piece instanceof Rock) {
+      int m = i+1;
+      int n = j;
+      while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
+        movements.add(new Movement(i,j,m,n));
+        m++;
+      }
+      if (emptyOrForeignCase(m,n,board, piece.getColor())) {
+        movements.add(new Movement(i,j,m,n));
+      }
+
+      m = i+1;
+      n = j;
+      while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
+        movements.add(new Movement(i,j,m,n));
+        m++;
+      }
+      if (emptyOrForeignCase(m,n,board, piece.getColor())) {
+        movements.add(new Movement(i,j,m,n));
+      }
+
+      m = i-1;
+      n = j;
+      while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
+        movements.add(new Movement(i,j,m,n));
+        m--;
+      }
+      if (emptyOrForeignCase(m,n,board, piece.getColor())) {
+        movements.add(new Movement(i,j,m,n));
+      }
+
+      m = i;
+      n = j-1;
+      while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
+        movements.add(new Movement(i,j,m,n));
+        n--;
+      }
+      if (emptyOrForeignCase(m,n,board, piece.getColor())) {
+        movements.add(new Movement(i,j,m,n));
       }
     }
     return movements;

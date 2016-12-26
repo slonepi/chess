@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * Created by yann on 23/12/16.
  */
@@ -20,4 +22,5 @@ public abstract class Piece {
   public String toString() {
     return " "+symbol+" ";
   }
+
 }

@@ -3,6 +3,7 @@ package model;
 import model.Pieces.King;
 import model.Pieces.Knight;
 import model.Pieces.Pawn;
+import model.Pieces.Rock;
 import util.MovementUtil;
 
 import java.util.ArrayList;
@@ -37,6 +38,12 @@ public class Board {
     // Kings
     board[0][4] = new King(Color.WHITE);
     board[7][4] = new King(Color.BLACK);
+
+    // Rocks
+    board[0][0] = new Rock(Color.WHITE);
+    board[0][7] = new Rock(Color.WHITE);
+    board[7][0] = new Rock(Color.BLACK);
+    board[7][7] = new Rock(Color.BLACK);
   }
 
   public List<Movement> getAvailableMouvements(Color color) {
@@ -66,7 +73,7 @@ public class Board {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < 8; i ++) {
+    for (int i = 7; i >= 0; i --) {
       for (int j = 0; j<8; j++) {
         sb.append(" -");
       }
