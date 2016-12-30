@@ -12,16 +12,16 @@ import static util.MovementUtil.emptyOrForeignCase;
 import static util.MovementUtil.validateCoordonates;
 
 /**
- * Created by yann on 23/12/16.
+ * Created by yann on 30/12/16.
  */
-public class Rock extends Piece {
+public class Bishop extends Piece {
 
-  public Rock(Color color) {
-    super(color, "R");
+  public Bishop(Color color) {
+    super(color,"B");
   }
 
   @Override
   public List<Movement> giveAvailableMovement(Piece[][] board, int i, int j) {
-    return DiagonalPiece.giveAvailableMovement(board, i, j, color);
+    return LinearPiece.giveAvailableMovement(board, i, j,color);
   }
-  }
+}

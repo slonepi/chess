@@ -35,7 +35,7 @@ public class Game {
     Movement movementAsked;
     while(true) {
       System.out.println(game.toString());
-      List<Movement> availableMovements = game.board.getAvailableMouvements(game.current.getColor());
+      List<Movement> availableMovements = game.board.getAvailableMovements(game.current.getColor());
       System.out.println(availableMovements.size()+" movements available");
       // Get player movement
       movementAsked = InputUtil.receiveInput();

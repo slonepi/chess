@@ -21,28 +21,28 @@ public class Knight extends Piece {
   public List<Movement> giveAvailableMovement(Piece[][] board, int i, int j) {
     List<Movement> movements = new ArrayList<>();
 
-    if (emptyOrForeignCase(i - 1, j - 2, board, this.color)) {
+    if (emptyOrForeignCase(i - 1, j - 2, board, color)) {
       movements.add(new Movement(i, j, i - 1, j - 2));
     }
-    if (emptyOrForeignCase(i - 2, j - 1, board, this.color)) {
+    if (emptyOrForeignCase(i - 2, j - 1, board, color)) {
       movements.add(new Movement(i, j, i - 2, j - 1));
     }
-    if (emptyOrForeignCase(i - 2, j + 1, board, this.color)) {
+    if (emptyOrForeignCase(i - 2, j + 1, board, color)) {
       movements.add(new Movement(i, j, i - 2, j + 1));
     }
-    if (emptyOrForeignCase(i - 1, j + 2, board, this.color)) {
+    if (emptyOrForeignCase(i - 1, j + 2, board, color)) {
       movements.add(new Movement(i, j, i - 1, j + 2));
     }
-    if (emptyOrForeignCase(i + 1, j - 2, board, this.color)) {
+    if (emptyOrForeignCase(i + 1, j - 2, board, color)) {
       movements.add(new Movement(i, j, i + 1, j - 2));
     }
-    if (emptyOrForeignCase(i + 2, j - 1, board, this.color)) {
+    if (emptyOrForeignCase(i + 2, j - 1, board, color)) {
       movements.add(new Movement(i, j, i + 2, j - 1));
     }
-    if (emptyOrForeignCase(i + 2, j + 1, board, this.color)) {
+    if (emptyOrForeignCase(i + 2, j + 1, board, color)) {
       movements.add(new Movement(i, j, i + 2, j + 1));
     }
-    if (emptyOrForeignCase(i + 1, j + 2, board, this.color)) {
+    if (emptyOrForeignCase(i + 1, j + 2, board, color)) {
       movements.add(new Movement(i, j, i + 1, j + 2));
     }
 

@@ -1,9 +1,6 @@
 package model;
 
-import model.Pieces.King;
-import model.Pieces.Knight;
-import model.Pieces.Pawn;
-import model.Pieces.Rock;
+import model.Pieces.*;
 import util.MovementUtil;
 
 import java.util.ArrayList;
@@ -35,9 +32,17 @@ public class Board {
     board[7][1] = new Knight(Color.BLACK);
     board[7][6] = new Knight(Color.BLACK);
 
-    // Kings
+    // Knights
+    board[0][2] = new Bishop(Color.WHITE);
+    board[0][5] = new Bishop(Color.WHITE);
+    board[7][2] = new Bishop(Color.BLACK);
+    board[7][5] = new Bishop(Color.BLACK);
+
+    // Kings & Queens
     board[0][4] = new King(Color.WHITE);
     board[7][4] = new King(Color.BLACK);
+    board[0][3] = new Queen(Color.WHITE);
+    board[7][3] = new Queen(Color.BLACK);
 
     // Rocks
     board[0][0] = new Rock(Color.WHITE);
@@ -46,18 +51,18 @@ public class Board {
     board[7][7] = new Rock(Color.BLACK);
   }
 
-  public List<Movement> getAvailableMouvements(Color color) {
-    List<Movement> availableMouvements = new ArrayList<>();
+  public List<Movement> getAvailableMovements(Color color) {
+    List<Movement> availableMovements = new ArrayList<>();
     Piece piece;
     for (int i = 0; i < 8 ; i++) {
       for (int j = 0; j < 8; j++) {
         piece = board[i][j];
         if (piece != null && piece.getColor() == color) {
-          availableMouvements.addAll(piece.giveAvailableMovement(board,i,j));
+          availableMovements.addAll(piece.giveAvailableMovement(board,i,j));
         }
       }
     }
-    return availableMouvements;
+    return availableMovements;
   }
 
   public void doMove(Movement movement) {
