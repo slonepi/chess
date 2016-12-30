@@ -2,8 +2,10 @@ import model.Board;
 import model.Color;
 import model.Movement;
 import model.Player;
+import util.InputConversionUtil;
+import util.InputUtil;
+import util.MovementUtil;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,31 +32,25 @@ public class Game {
 
     Game game = new Game();
     game.init();
-
+    Movement movementAsked;
     while(true) {
       System.out.println(game.toString());
       List<Movement> availableMovements = game.board.getAvailableMouvements(game.current.getColor());
-
+      System.out.println(availableMovements.size()+" movements available");
       // Get player movement
-      Movement movement;
-      int i, j;
+      movementAsked = InputUtil.receiveInput();
+      Movement movement = validateInputs(availableMovements,movementAsked);
 
-      do {
-        Scanner scanner = new Scanner(System.in);
-        //TODO read optional piece if ambiguous
-        System.out.println("Enter i...");
-        i = scanner.nextInt();
-        System.out.println("Enter j...");
-        j = scanner.nextInt();
-        movement = validateInputs(availableMovements,i,j);
+      // If the movement is not available
+      while (movement == null) {
+        System.out.println("Movement forbidden!!!");
+        movementAsked = InputUtil.receiveInput();
+        movement = validateInputs(availableMovements,movementAsked);
 
-        if (movement == null) {
-          System.out.println("!!! Invalid inputs !!!");
-        }
-      } while (movement == null);
+      }
 
       // Move piece
-      System.out.println("Movement asked... i = "+i+", i = "+j);
+      System.out.println("Movement asked... i = "+movement);
       game.board.doMove(movement);
 
       // Switch player
@@ -62,18 +58,14 @@ public class Game {
     }
   }
 
-  public static Movement validateInputs(List<Movement> movements, int i, int j) {
-    if (i<0 || i>7 || j<0 || j>7)
-      return null;
-    else {
-      boolean foundMatch = false;
+  public static Movement validateInputs(List<Movement> movements, Movement movementAsked) {
+    boolean foundMatch = false;
       for (Movement movement : movements) {
-        if(movement.ito == i && movement.jto == j) {
+        if(movement.equals(movementAsked)) {
           return movement;
         }
       }
-      return null;
-    }
+    return null;
   }
 
   @Override

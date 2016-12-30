@@ -29,7 +29,7 @@ public class Board {
       board[6][i] = new Pawn(Color.BLACK);
     }
 
-    // Knights
+   // Knights
     board[0][1] = new Knight(Color.WHITE);
     board[0][6] = new Knight(Color.WHITE);
     board[7][1] = new Knight(Color.BLACK);
@@ -78,13 +78,20 @@ public class Board {
         sb.append(" -");
       }
       sb.append("\n");
-      sb.append(i);
+      sb.append(i+1);
       sb.append("|");
       for (int j = 0; j<8; j++) {
         sb.append(format(board[i][j],i,j));
         sb.append("|");
       }
       sb.append("\n");
+    }
+    sb.append("  ");
+    for (int i = 0; i <8; i++) {
+      sb.append(" ")
+              .append(Character.toString((char) (i+65)))
+              .append("  ");
+
     }
     return sb.toString();
   }
