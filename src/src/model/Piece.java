@@ -14,6 +14,8 @@ public abstract class Piece {
     this.symbol = symbol;
   }
 
+  public abstract List<Movement> giveAvailableMovement(Piece[][] board, int i, int j);
+
   public Color getColor() {
     return this.color;
   }

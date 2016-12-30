@@ -53,7 +53,7 @@ public class Board {
       for (int j = 0; j < 8; j++) {
         piece = board[i][j];
         if (piece != null && piece.getColor() == color) {
-          availableMouvements.addAll(MovementUtil.getPieceMovement(piece,board,i,j));
+          availableMouvements.addAll(piece.giveAvailableMovement(board,i,j));
         }
       }
     }
