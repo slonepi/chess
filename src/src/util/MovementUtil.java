@@ -1,15 +1,7 @@
 package util;
 
 import model.Color;
-import model.Movement;
 import model.Piece;
-import model.Pieces.King;
-import model.Pieces.Knight;
-import model.Pieces.Pawn;
-import model.Pieces.Rock;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by yann on 23/12/16.

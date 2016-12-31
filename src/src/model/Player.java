@@ -19,4 +19,8 @@ public class Player {
   public Color getColor() {
     return color;
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }

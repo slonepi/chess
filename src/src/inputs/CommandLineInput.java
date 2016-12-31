@@ -1,6 +1,7 @@
-package util;
+package inputs;
 
 import model.Movement;
+import util.InputConversionUtil;
 
 import java.security.InvalidParameterException;
 import java.util.Scanner;
@@ -8,7 +9,9 @@ import java.util.Scanner;
 /**
  * Created by yann on 30/12/16.
  */
-public class InputUtil {
+public class CommandLineInput {
+
+  //TODO init method for players names
 
   public static Movement receiveInput() {
     Movement movement = null;
@@ -28,4 +31,5 @@ public class InputUtil {
     }
     return movement;
   }
+
 }

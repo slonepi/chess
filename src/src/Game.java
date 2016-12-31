@@ -1,13 +1,11 @@
+import inputs.FileInput;
 import model.Board;
 import model.Color;
 import model.Movement;
 import model.Player;
-import util.InputConversionUtil;
-import util.InputUtil;
-import util.MovementUtil;
+import inputs.CommandLineInput;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created by yann on 23/12/16.
@@ -38,13 +36,14 @@ public class Game {
       List<Movement> availableMovements = game.board.getAvailableMovements(game.current.getColor());
       System.out.println(availableMovements.size()+" movements available");
       // Get player movement
-      movementAsked = InputUtil.receiveInput();
+      //movementAsked = CommandLineInput.receiveInput();
+      movementAsked = FileInput.receiveInput();
       Movement movement = validateInputs(availableMovements,movementAsked);
 
       // If the movement is not available
       while (movement == null) {
         System.out.println("Movement forbidden!!!");
-        movementAsked = InputUtil.receiveInput();
+        movementAsked = CommandLineInput.receiveInput();
         movement = validateInputs(availableMovements,movementAsked);
 
       }
@@ -68,6 +67,10 @@ public class Game {
     return null;
   }
 
+  public void setPlayersNames(String name1, String name2) {
+    this.p1.setName(name1);
+    this.p2.setName(name2);
+  }
   @Override
   public String toString() {
 
