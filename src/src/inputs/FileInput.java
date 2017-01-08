@@ -1,11 +1,13 @@
 package inputs;
 
+import model.Color;
 import model.Movement;
+import model.RockMovement;
+import model.SimpleMovement;
 import util.FileUtil;
 import util.InputConversionUtil;
 
 import java.security.InvalidParameterException;
-import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +22,7 @@ public class FileInput {
 
   //TODO init method for file location
 
-  public static Movement receiveInput() {
+  public static Movement receiveInput(Color currentPlayerColor) {
     scanner.nextLine();
     if (lines == null) {
       lines = FileUtil.readFromFile("resources/history/Game1.txt");
@@ -28,11 +30,20 @@ public class FileInput {
 
     Movement movement = null;
 
-    if(readIndex> lines.size()) {
+    if (readIndex> lines.size()) {
       throw new InvalidParameterException("File terminated");
     }
 
-    String[] line = lines.get(readIndex).replace("-"," ").split(" ");
+    String lineRead = lines.get(readIndex++).replace("-"," ");
+
+    if (lineRead.contains("O O O")) {
+      return new RockMovement(true, currentPlayerColor);
+    }
+    else if (lineRead.contains("O O")) {
+      return new RockMovement(false, currentPlayerColor);
+    }
+
+    String[] line = lineRead.split(" ");
     String from;
     String to;
 
@@ -49,15 +60,12 @@ public class FileInput {
     }
 
     try {
-      System.out.println(line);
       movement = InputConversionUtil.toNumericValue(from,to);
-      System.out.println(movement);
     }
     catch (InvalidParameterException e){
       System.err.println(e.toString());
     }
 
-    readIndex++;
     System.out.println(movement);
     return movement;
   }

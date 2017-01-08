@@ -1,7 +1,7 @@
 package model.Pieces;
 
 import model.Color;
-import model.Movement;
+import model.SimpleMovement;
 import model.Piece;
 
 import java.util.List;
@@ -17,8 +17,8 @@ public class Queen extends Piece {
 
 
   @Override
-  public List<Movement> giveAvailableMovement(Piece[][] board, int i, int j) {
-    List<Movement> avaibleMovements = LinearPiece.giveAvailableMovement(board, i , j , color);
+  public List<SimpleMovement> giveAvailableMovement(Piece[][] board, int i, int j) {
+    List<SimpleMovement> avaibleMovements = LinearPiece.giveAvailableMovement(board, i , j , color);
     avaibleMovements.addAll(DiagonalPiece.giveAvailableMovement(board, i, j, color));
     return avaibleMovements;
   }

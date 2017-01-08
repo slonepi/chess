@@ -14,11 +14,16 @@ public abstract class Piece {
     this.symbol = symbol;
   }
 
-  public abstract List<Movement> giveAvailableMovement(Piece[][] board, int i, int j);
+  public abstract List<SimpleMovement> giveAvailableMovement(Piece[][] board, int i, int j);
 
   public Color getColor() {
     return this.color;
   }
+
+  // Default behaviour, different for some piece (rock, pawn and king)
+  public void move() {}
+
+  public boolean hasMoved() { return false;}
 
   @Override
   public String toString() {

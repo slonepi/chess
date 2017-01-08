@@ -1,8 +1,5 @@
 import inputs.FileInput;
-import model.Board;
-import model.Color;
-import model.Movement;
-import model.Player;
+import model.*;
 import inputs.CommandLineInput;
 
 import java.util.List;
@@ -37,19 +34,19 @@ public class Game {
       System.out.println(availableMovements.size()+" movements available");
       // Get player movement
       //movementAsked = CommandLineInput.receiveInput();
-      movementAsked = FileInput.receiveInput();
-      Movement movement = validateInputs(availableMovements,movementAsked);
+      movementAsked = FileInput.receiveInput(game.current.getColor());
+      Movement movement = validateInputs(availableMovements, movementAsked);
 
       // If the movement is not available
       while (movement == null) {
-        System.out.println("Movement forbidden!!!");
-        movementAsked = CommandLineInput.receiveInput();
+        System.out.println("SimpleMovement forbidden!!!");
+        movementAsked = CommandLineInput.receiveInput(Color.BLACK);
         movement = validateInputs(availableMovements,movementAsked);
 
       }
 
       // Move piece
-      System.out.println("Movement asked... i = "+movement);
+      System.out.println("SimpleMovement asked... i = "+movement);
       game.board.doMove(movement);
 
       // Switch player
@@ -58,7 +55,6 @@ public class Game {
   }
 
   public static Movement validateInputs(List<Movement> movements, Movement movementAsked) {
-    boolean foundMatch = false;
       for (Movement movement : movements) {
         if(movement.equals(movementAsked)) {
           return movement;
@@ -71,6 +67,7 @@ public class Game {
     this.p1.setName(name1);
     this.p2.setName(name2);
   }
+
   @Override
   public String toString() {
 

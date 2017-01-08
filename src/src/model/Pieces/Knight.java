@@ -1,7 +1,7 @@
 package model.Pieces;
 
 import model.Color;
-import model.Movement;
+import model.SimpleMovement;
 import model.Piece;
 
 import java.util.ArrayList;
@@ -18,32 +18,32 @@ public class Knight extends Piece {
   }
 
   @Override
-  public List<Movement> giveAvailableMovement(Piece[][] board, int i, int j) {
-    List<Movement> movements = new ArrayList<>();
+  public List<SimpleMovement> giveAvailableMovement(Piece[][] board, int i, int j) {
+    List<SimpleMovement> movements = new ArrayList<>();
 
     if (emptyOrForeignCase(i - 1, j - 2, board, color)) {
-      movements.add(new Movement(i, j, i - 1, j - 2));
+      movements.add(new SimpleMovement(i, j, i - 1, j - 2));
     }
     if (emptyOrForeignCase(i - 2, j - 1, board, color)) {
-      movements.add(new Movement(i, j, i - 2, j - 1));
+      movements.add(new SimpleMovement(i, j, i - 2, j - 1));
     }
     if (emptyOrForeignCase(i - 2, j + 1, board, color)) {
-      movements.add(new Movement(i, j, i - 2, j + 1));
+      movements.add(new SimpleMovement(i, j, i - 2, j + 1));
     }
     if (emptyOrForeignCase(i - 1, j + 2, board, color)) {
-      movements.add(new Movement(i, j, i - 1, j + 2));
+      movements.add(new SimpleMovement(i, j, i - 1, j + 2));
     }
     if (emptyOrForeignCase(i + 1, j - 2, board, color)) {
-      movements.add(new Movement(i, j, i + 1, j - 2));
+      movements.add(new SimpleMovement(i, j, i + 1, j - 2));
     }
     if (emptyOrForeignCase(i + 2, j - 1, board, color)) {
-      movements.add(new Movement(i, j, i + 2, j - 1));
+      movements.add(new SimpleMovement(i, j, i + 2, j - 1));
     }
     if (emptyOrForeignCase(i + 2, j + 1, board, color)) {
-      movements.add(new Movement(i, j, i + 2, j + 1));
+      movements.add(new SimpleMovement(i, j, i + 2, j + 1));
     }
     if (emptyOrForeignCase(i + 1, j + 2, board, color)) {
-      movements.add(new Movement(i, j, i + 1, j + 2));
+      movements.add(new SimpleMovement(i, j, i + 1, j + 2));
     }
 
     return movements;

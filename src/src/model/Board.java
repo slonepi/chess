@@ -32,7 +32,7 @@ public class Board {
     board[7][1] = new Knight(Color.BLACK);
     board[7][6] = new Knight(Color.BLACK);
 
-    // Knights
+    // Bishops
     board[0][2] = new Bishop(Color.WHITE);
     board[0][5] = new Bishop(Color.WHITE);
     board[7][2] = new Bishop(Color.BLACK);
@@ -41,8 +41,8 @@ public class Board {
     // Kings & Queens
     board[0][4] = new King(Color.WHITE);
     board[7][4] = new King(Color.BLACK);
-    board[0][3] = new Queen(Color.WHITE);
-    board[7][3] = new Queen(Color.BLACK);
+    //board[0][3] = new Queen(Color.WHITE);
+    //board[7][3] = new Queen(Color.BLACK);
 
     // Rocks
     board[0][0] = new Rock(Color.WHITE);
@@ -54,6 +54,21 @@ public class Board {
   public List<Movement> getAvailableMovements(Color color) {
     List<Movement> availableMovements = new ArrayList<>();
     Piece piece;
+
+    //TODO check if one square is threatened
+    // Rocks movements
+    int row = color == Color.BLACK ? 7 : 0;
+    if (board[row][4] instanceof King && !board[row][4].hasMoved()) {
+      Piece rockLeft = board[row][0];
+      Piece rockRigth = board[row][7];
+
+      if (rockLeft instanceof Rock && (rockLeft.getColor() == color) && board[row][1] == null && board[row][2] == null && board[row][3] == null) {
+        availableMovements.add(new RockMovement(true, color));
+      }
+      if (rockRigth instanceof Rock && (rockRigth.getColor() == color) && board[row][5] == null && board[row][6] == null) {
+        availableMovements.add(new RockMovement(false, color));
+      }
+    }
     for (int i = 0; i < 8 ; i++) {
       for (int j = 0; j < 8; j++) {
         piece = board[i][j];
@@ -66,13 +81,7 @@ public class Board {
   }
 
   public void doMove(Movement movement) {
-    Piece movingPiece = board[movement.ifrom][movement.jfrom];
-    board[movement.ifrom][movement.jfrom] = null;
-
-    if (board[movement.ito][movement.jto] != null) {
-      eatenPieces.add(board[movement.ito][movement.jto]);
-    }
-    board[movement.ito][movement.jto] = movingPiece;
+    movement.executeMovement(board, eatenPieces);
   }
 
   @Override

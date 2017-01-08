@@ -1,7 +1,7 @@
 package model.Pieces;
 
 import model.Color;
-import model.Movement;
+import model.SimpleMovement;
 import model.Piece;
 
 import java.util.ArrayList;
@@ -16,51 +16,51 @@ import static util.MovementUtil.validateCoordonates;
  */
 public class LinearPiece {
 
-  public static List<Movement> giveAvailableMovement(Piece[][] board, int i, int j, Color color) {
-      List<Movement> movements = new ArrayList<>();
+  public static List<SimpleMovement> giveAvailableMovement(Piece[][] board, int i, int j, Color color) {
+      List<SimpleMovement> movements = new ArrayList<>();
 
       int m = i+1;
       int n = j+1;
       while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
         m++;
         n++;
       }
       if (emptyOrForeignCase(m,n,board, color)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
       }
 
       m = i-1;
       n = j-1;
       while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
         m--;
         n--;
       }
       if (emptyOrForeignCase(m,n,board, color)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
       }
 
       m = i-1;
       n = j+1;
       while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
         m--;
         n++;
       }
       if (emptyOrForeignCase(m,n,board, color)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
       }
 
       m = i-1;
       n = j-1;
       while (validateCoordonates(m,n) && emptyCase(m,n,board)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
         m--;
         n--;
       }
       if (emptyOrForeignCase(m,n,board, color)) {
-        movements.add(new Movement(i,j,m,n));
+        movements.add(new SimpleMovement(i,j,m,n));
       }
       return movements;
     }

@@ -58,25 +58,5 @@ public class FileUtil {
 	    //System.out.println(result.toString());
 	    return result;
 	}
-	
-	/**
-	 * Edit the string to fit with the research rules
-	 */
-	private static String formatString(String in) {
-		String out =in.trim();
-		out = out.replace(" ", "+");
-		
-		// If contains "[...]" deletes all (brackets+content). Example : [The movie]
-		if (out.contains("[")) {
-			out = out.substring(0,out.indexOf("["));
-		}
-		
-		// If contains "(...)", replaces the brackets with blanks (the content is unchanged). Example : Hangover (The)
-		if (out.contains("(")) {
-			out = out.replace("(", "");
-			out = out.replace(")", "");
-		}
-		return out.substring(0,out.length());
-	}
-	
+
 }
