@@ -12,11 +12,11 @@ import java.util.Scanner;
 /**
  * Created by yann on 30/12/16.
  */
-public class CommandLineInput {
+public class CommandLineInput implements InputHandler{
 
   //TODO init method for players names
 
-  public static Movement receiveInput(Color currentPlayerColor) {
+  public Movement receiveInput(Color currentPlayerColor) {
     Movement movement = null;
     Scanner scanner = new Scanner(System.in);
     while(movement==null) {

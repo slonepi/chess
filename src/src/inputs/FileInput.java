@@ -14,15 +14,15 @@ import java.util.Scanner;
 /**
  * Created by yann on 31/12/16.
  */
-public class FileInput {
+public class FileInput implements InputHandler{
 
-  private static List<String> lines;
-  private static Scanner scanner = new Scanner(System.in);
-  private static int readIndex = 0;
+  private List<String> lines;
+  private Scanner scanner = new Scanner(System.in);
+  private int readIndex = 0;
 
   //TODO init method for file location
 
-  public static Movement receiveInput(Color currentPlayerColor) {
+  public Movement receiveInput(Color currentPlayerColor) {
     scanner.nextLine();
     if (lines == null) {
       lines = FileUtil.readFromFile("resources/history/Game1.txt");

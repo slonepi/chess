@@ -1,4 +1,5 @@
 import inputs.FileInput;
+import inputs.InputHandler;
 import model.*;
 import inputs.CommandLineInput;
 
@@ -11,6 +12,7 @@ public class Game {
   private Player p1;
   private Player p2;
   private Player current;
+  private InputHandler inputHandler;
 
   private Board board;
 
@@ -21,6 +23,8 @@ public class Game {
 
     board = new Board();
     board.init();
+    inputHandler = new FileInput();
+    //inputHandler = new CommandLineInput();
    }
 
   public static void main(String[] args) {
@@ -32,21 +36,22 @@ public class Game {
       System.out.println(game.toString());
       List<Movement> availableMovements = game.board.getAvailableMovements(game.current.getColor());
       System.out.println(availableMovements.size()+" movements available");
+
       // Get player movement
-      //movementAsked = CommandLineInput.receiveInput();
-      movementAsked = FileInput.receiveInput(game.current.getColor());
+      movementAsked = game.inputHandler.receiveInput(game.current.getColor());
       Movement movement = validateInputs(availableMovements, movementAsked);
 
       // If the movement is not available
       while (movement == null) {
-        System.out.println("SimpleMovement forbidden!!!");
-        movementAsked = CommandLineInput.receiveInput(Color.BLACK);
+        //TODO deal with the error in the inputHandler
+        System.err.println("Movement forbidden!!!");
+        movementAsked = game.inputHandler.receiveInput(Color.BLACK);
         movement = validateInputs(availableMovements,movementAsked);
 
       }
 
       // Move piece
-      System.out.println("SimpleMovement asked... i = "+movement);
+      System.out.println("Movement asked... i = "+movement);
       game.board.doMove(movement);
 
       // Switch player
@@ -70,7 +75,6 @@ public class Game {
 
   @Override
   public String toString() {
-
     return board.toString();
   }
 }
