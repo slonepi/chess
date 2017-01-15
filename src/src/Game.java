@@ -45,7 +45,7 @@ public class Game {
       while (movement == null) {
         //TODO deal with the error in the inputHandler
         System.err.println("Movement forbidden!!!");
-        movementAsked = game.inputHandler.receiveInput(Color.BLACK);
+        movementAsked = game.inputHandler.receiveInput(game.current.getColor());
         movement = validateInputs(availableMovements,movementAsked);
 
       }

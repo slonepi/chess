@@ -25,7 +25,9 @@ public class FileInput implements InputHandler{
   public Movement receiveInput(Color currentPlayerColor) {
     scanner.nextLine();
     if (lines == null) {
-      lines = FileUtil.readFromFile("resources/history/Game1.txt");
+      //lines = FileUtil.readFromFile("resources/history/Game1.txt");
+      lines = FileUtil.readFromFile("resources/history/RockHistory.txt");
+
     }
 
     Movement movement = null;

@@ -1,10 +1,11 @@
 package model;
 
 import model.Pieces.*;
-import util.MovementUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static util.MovementUtil.checkIfCaseIsThreatened;
 
 /**
  * Created by yann on 23/12/16.
@@ -21,7 +22,7 @@ public class Board {
     eatenPieces = new ArrayList<>();
 
     // Pawns
-    for (int i = 0; i < 8; i++) {
+    /*for (int i = 0; i < 8; i++) {
       board[1][i] = new Pawn(Color.WHITE);
       board[6][i] = new Pawn(Color.BLACK);
     }
@@ -37,14 +38,17 @@ public class Board {
     board[0][5] = new Bishop(Color.WHITE);
     board[7][2] = new Bishop(Color.BLACK);
     board[7][5] = new Bishop(Color.BLACK);
-
+*/
     // Kings & Queens
     board[0][4] = new King(Color.WHITE);
     board[7][4] = new King(Color.BLACK);
-    //board[0][3] = new Queen(Color.WHITE);
-    //board[7][3] = new Queen(Color.BLACK);
+    board[0][3] = new Queen(Color.WHITE);
+    board[7][3] = new Queen(Color.BLACK);
 
     // Rocks
+    board[1][0] = new Pawn(Color.WHITE);
+    board[1][7] = new Pawn(Color.WHITE);
+    board[1][4] = new Pawn(Color.WHITE);
     board[0][0] = new Rock(Color.WHITE);
     board[0][7] = new Rock(Color.WHITE);
     board[7][0] = new Rock(Color.BLACK);
@@ -60,12 +64,25 @@ public class Board {
     int row = color == Color.BLACK ? 7 : 0;
     if (board[row][4] instanceof King && !board[row][4].hasMoved()) {
       Piece rockLeft = board[row][0];
-      Piece rockRigth = board[row][7];
+      Piece rockRight = board[row][7];
 
-      if (rockLeft instanceof Rock && (rockLeft.getColor() == color) && board[row][1] == null && board[row][2] == null && board[row][3] == null) {
+      // Check if King can rockLeft
+      if (rockLeft instanceof Rock && (rockLeft.getColor() == color)
+              && board[row][1] == null && board[row][2] == null && board[row][3] == null
+              && !checkIfCaseIsThreatened(board,row,0,color)
+              && !checkIfCaseIsThreatened(board,row,1,color)
+              && !checkIfCaseIsThreatened(board,row,2,color)
+              && !checkIfCaseIsThreatened(board,row,3,color)
+              && !checkIfCaseIsThreatened(board,row,4,color)) {
         availableMovements.add(new RockMovement(true, color));
       }
-      if (rockRigth instanceof Rock && (rockRigth.getColor() == color) && board[row][5] == null && board[row][6] == null) {
+
+      if (rockRight instanceof Rock && (rockRight.getColor() == color)
+              && board[row][5] == null && board[row][6] == null
+              && !checkIfCaseIsThreatened(board,row,7,color)
+              && !checkIfCaseIsThreatened(board,row,6,color)
+              && !checkIfCaseIsThreatened(board,row,5,color)
+              && !checkIfCaseIsThreatened(board,row,4,color)) {
         availableMovements.add(new RockMovement(false, color));
       }
     }
@@ -80,6 +97,7 @@ public class Board {
     return availableMovements;
   }
 
+  //TODO notify rock/king they have been moved
   public void doMove(Movement movement) {
     movement.executeMovement(board, eatenPieces);
   }

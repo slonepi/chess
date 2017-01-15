@@ -18,6 +18,7 @@ public class CommandLineInput implements InputHandler{
 
   public Movement receiveInput(Color currentPlayerColor) {
     Movement movement = null;
+    System.out.println("Player "+currentPlayerColor + " turn");
     Scanner scanner = new Scanner(System.in);
     while(movement==null) {
       try {
