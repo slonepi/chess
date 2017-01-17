@@ -1,9 +1,11 @@
 package model;
 
 import model.Pieces.*;
+import util.MovementUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import util.Logger;
 
 import static util.MovementUtil.checkIfCaseIsThreatened;
 
@@ -76,6 +78,7 @@ public class Board {
               && !checkIfCaseIsThreatened(board,row,3,color)
               && !checkIfCaseIsThreatened(board,row,4,color)) {
         availableMovements.add(new RockMovement(true, color));
+        Logger.logInformation("Rock left possible");
       }
 
       if (rockRight instanceof Rock && (rockRight.getColor() == color)
@@ -86,20 +89,42 @@ public class Board {
               && !checkIfCaseIsThreatened(board,row,5,color)
               && !checkIfCaseIsThreatened(board,row,4,color)) {
         availableMovements.add(new RockMovement(false, color));
+        Logger.logInformation("Rock right possible");
       }
     }
-    for (int i = 0; i < 8 ; i++) {
-      for (int j = 0; j < 8; j++) {
+
+    // Find sexier way to find the king
+    int kingX = -1;
+    int kingY = -1;
+
+    int i =0, j=0;
+    while (kingX == -1){
+      j=0;
+      while (kingX == -1 && j<8) {
+        if (board[i][j] instanceof King && board[i][j].getColor() == color) {
+          kingX = i;
+          kingY = j;
+        }
+        j++;
+      }
+      i++;
+    }
+    List<Piece> pinnedPieces = MovementUtil.findPinnedPieces(board, kingX, kingY, color);
+    Logger.logInformation("Number of pinned pieces:"+pinnedPieces.size());
+
+    for (i = 0; i < 8 ; i++) {
+      for (j = 0; j < 8; j++) {
         piece = board[i][j];
-        if (piece != null && piece.getColor() == color) {
+        if (piece != null && piece.getColor() == color && !pinnedPieces.contains(piece)) {
           availableMovements.addAll(piece.giveAvailableMovement(board,i,j));
         }
       }
     }
+
+    Logger.logInformation("Movements available:"+availableMovements.size());
     return availableMovements;
   }
 
-  //TODO notify rock/king they have been moved
   public void doMove(Movement movement) {
     movement.executeMovement(board, eatenPieces);
   }
