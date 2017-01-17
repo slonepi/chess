@@ -13,6 +13,9 @@ import static util.MovementUtil.emptyOrForeignCase;
  * Created by yann on 23/12/16.
  */
 public class Knight extends Piece {
+
+  private boolean hasMoved;
+
   public Knight(Color color) {
     super(color,"N");
   }
@@ -47,5 +50,16 @@ public class Knight extends Piece {
     }
 
     return movements;
+  }
+
+  @Override
+  public void move() {
+    super.move();
+    this.hasMoved = true;
+  }
+
+  @Override
+  public boolean hasMoved() {
+    return hasMoved;
   }
 }

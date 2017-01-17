@@ -18,11 +18,12 @@ public class RockMovement extends Movement {
   @Override
   public void executeMovement(Piece[][] board, List<Piece> eatenPieces) {
     int i = color == Color.BLACK ? 7 : 0;
+    Piece king, rock;
 
     System.out.println("i="+i+","+(color==Color.BLACK));
     if (isQueenSideRock) {
-      Piece king = board[i][4];
-      Piece rock = board[i][0];
+      king = board[i][4];
+      rock = board[i][0];
 
       board[i][2] = king;
       board[i][3] = rock;
@@ -31,15 +32,18 @@ public class RockMovement extends Movement {
       board[i][0] = null;
     }
     else {
-      Piece king = board[i][4];
-      Piece rock = board[i][7];
+      king = board[i][4];
+      rock = board[i][7];
 
       board[i][6] = king;
       board[i][5] = rock;
 
       board[i][4] = null;
       board[i][7] = null;
+
     }
+    king.move();
+    rock.move();
   }
 
   @Override

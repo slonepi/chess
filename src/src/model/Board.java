@@ -69,6 +69,7 @@ public class Board {
       // Check if King can rockLeft
       if (rockLeft instanceof Rock && (rockLeft.getColor() == color)
               && board[row][1] == null && board[row][2] == null && board[row][3] == null
+              && !rockLeft.hasMoved()
               && !checkIfCaseIsThreatened(board,row,0,color)
               && !checkIfCaseIsThreatened(board,row,1,color)
               && !checkIfCaseIsThreatened(board,row,2,color)
@@ -79,6 +80,7 @@ public class Board {
 
       if (rockRight instanceof Rock && (rockRight.getColor() == color)
               && board[row][5] == null && board[row][6] == null
+              && !rockRight.hasMoved()
               && !checkIfCaseIsThreatened(board,row,7,color)
               && !checkIfCaseIsThreatened(board,row,6,color)
               && !checkIfCaseIsThreatened(board,row,5,color)

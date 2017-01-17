@@ -75,5 +75,6 @@ public class SimpleMovement extends Movement {
       eatenPieces.add(board[ito][jto]);
     }
     board[ito][jto] = movingPiece;
+    movingPiece.move();
   }
 }
